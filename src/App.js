@@ -8,7 +8,7 @@ function App() {
   const [imgUrl, setImgUrl] = useState(
     'https://memegen.link/tried/at_least/you_tried.jpg?preview=true&watermark=none',
   );
-
+// fetch site and get data values
   useEffect(() => {
     fetch('https://memegen.link/api/templates/', {
       headers: { 'Content-Type': 'application/json' },
@@ -28,21 +28,10 @@ function App() {
   function inputText2(event) {
     setTextSecondInput(event.target.value);
   }
-
-  function createURL() {
-    const path =
-      'https://memegen.link/tried/' +
-      textFirstInput +
-      '/' +
-      textSecondInput +
-      '.jpg?preview=true&watermark=none';
-
-    setImgUrl(path);
+  
+  function createURL(e) {
+    setImgUrl(imgUrl + '/' + textFirstInput + '/' + textSecondInput + '.jpg');
   }
-
-  //function onChangeSelect(e){
-  //  setSelectUrl(e.target.value);
-  //}
 
   return (
     <div className="App">
@@ -65,15 +54,16 @@ function App() {
 
       <br />
 
-      <input value={textFirstInput} onChange={inputText} placeholder="/path1" />
+      <input value={textFirstInput} onChange={inputText} />
       <input
         value={textSecondInput}
         onChange={inputText2}
-        placeholder="/path2"
+      
       />
 
       <br />
       <button onClick={createURL}>Go for text image!</button>
+
       <button
         onClick={() => {
           setTextFirstInput('');
