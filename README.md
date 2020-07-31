@@ -1,9 +1,9 @@
-# A web app with React 
+# Meme generator created with React
 
-## It allows for users to generate and download memes using the memegen.link website API.
+## API: memegen.link
 
- 1. User can enter text for the top and bottom of the meme
+- User can select the meme image dropdown list
 
- 2. User can change the meme photo
+- User can input text, with 'Add Text' button the user text will be generated on current image (top and bottom)
 
- 3. User can download the meme (on working)
+- With 'clear' button, user can reset input field

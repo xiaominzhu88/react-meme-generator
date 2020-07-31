@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  margin: 2em auto;
   background-color: #bfd4d7;
   padding: 2em;
 }
@@ -33,17 +32,31 @@ button:active {
   background-color: #fff;
   color: rgb(194, 12, 43);
 }
+a {
+  text-decoration: none;
+}
 
 input {
   width: 20%;
   height: 2em;
   border-radius: 5px;
-  margin-top: 2em;
+  margin: 2em;
   outline: none;
   border: none;
-  background-color: #bdb8b8;
+  background-color: #eef4ad;
+  font-family: monospace;
+  font-weight: 700;
 }
-@media (max-width: 500px) {
+img {
+  margin: 0 auto;
+}
+select {
+  width: 40%;
+  height: 2em;
+  margin: 1em;
+  border-radius: 5px;
+}
+@media (max-width: 650px) {
   h1 {
     font-size: 2em;
   }
@@ -62,6 +75,8 @@ input {
   img {
     width: 70%;
     height: auto;
-    margin: 2em auto;
+  }
+  a {
+    font-size: 0.8em;
   }
 }
