@@ -1,7 +1,9 @@
 .App {
   text-align: center;
+  margin: 2em auto;
+  background-color: #bfd4d7;
+  padding: 2em;
 }
-
 h1 {
   font-family: monospace;
   font-weight: bold;
@@ -37,4 +39,29 @@ input {
   height: 2em;
   border-radius: 5px;
   margin-top: 2em;
+  outline: none;
+  border: none;
+  background-color: #bdb8b8;
+}
+@media (max-width: 500px) {
+  h1 {
+    font-size: 2em;
+  }
+  input {
+    width: 8em;
+    margin: 1em;
+  }
+  button {
+    margin: 15px auto;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: 500;
+    margin-right: 1em;
+    width: 6em;
+  }
+  img {
+    width: 70%;
+    height: auto;
+    margin: 2em auto;
+  }
 }

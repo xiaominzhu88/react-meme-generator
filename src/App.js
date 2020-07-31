@@ -6,16 +6,13 @@ function App() {
   const [textFirstInput, setTextFirstInput] = useState('');
   const [textSecondInput, setTextSecondInput] = useState('');
   const [selectUrl, setSelectUrl] = useState([]);
-  const [selectName, setSelectName] = useState([]);
 
   const [imgUrl, setImgUrl] = useState(
     'https://memegen.link/tried/at_least/you_tried.jpg?preview=true&watermark=none',
   );
 
   //const [imageFont, setImageFont] = useState([]); // font
-  //const [imageName, setImageName] = useState('Doge'); // meme-name
 
-  // fetch url and get data values
   useEffect(() => {
     fetch('https://memegen.link/api/templates/', {
       headers: { 'Content-Type': 'application/json' },
@@ -24,11 +21,10 @@ function App() {
       .then((data) => {
         // Object.values shows all the links, KEYS should show all the names
         const imgData = Object.values(data); // meme- links
-        const imgName = Object.keys(data); // meme- names
 
-        // Update the dropdown list urls into NEW selectUrl, it is an Array, in return map over this Array to get each of url
+        //console.log('selectUrl:', imgData);
+        // Update the dropdown list urls into NEW selectUrl, Array, use map to get each of url
         setSelectUrl(imgData); // set to new meme-links
-        setSelectName(imgName); // set to new meme- names
       })
       .catch((e) => console.log(e));
   }, []);
@@ -42,7 +38,6 @@ function App() {
   //    });
   //}, []);
 
-
   //  input current value
   function inputText(event) {
     setTextFirstInput(event.target.value);
@@ -54,9 +49,7 @@ function App() {
 
   // update imgUrl with input value, get the hole Path, used  with button event
   function createURL() {
-    
-    setImgUrl(imgUrl + '/' + textFirstInput + '/' + textSecondInput + '.jpg');
-
+    setImgUrl(imgUrl + '/' + textFirstInput + '/' + textSecondInput);
   }
 
   //function createFont(e) {
@@ -70,8 +63,7 @@ function App() {
   //  );
   //}
   //https://memegen.link/joker/pick_a_different_font/people_lose_their_minds.jpg?font=typoline-demo
-  
-  
+
   const download = () => {
     const element = document.createElement('a');
     const file = new Blob(selectUrl, { type: 'image/jpg' });
@@ -86,22 +78,14 @@ function App() {
       <br />
       {/* Create Dropdown List to show all the fetched data-links */}
       <select onChange={(e) => setImgUrl(e.target.value)}>
-        {/* Show all the Dropdown - Links */}
         {selectUrl.map((url, i) => {
           return (
-            <option key={url} value={url.replace('api/templates/', '')}>
-              {url.replace('api/templates/', '')}
+            <option key={i} value={url.replace('api/templates/', '')}>
+              {/* use replace to get ONLY the img NAME in the option */}
+              {url.replace('https://memegen.link/api/templates/', '')}
             </option>
           );
         })}
-
-        {/*{selectName.map((name, i) => {
-          return (
-            <option key={i} value={name}>
-              {name}
-            </option>
-          );
-        })}*/}
       </select>
       {/*<select onChange={(e) => {
           setImgUrl(imgUrl + '/' + selectName + '/' +
@@ -132,7 +116,7 @@ function App() {
         onChange={inputText2}
       />
       <br />
-      <button onClick={createURL}>Go for text image!</button>
+      <button onClick={createURL}>Add Text!</button>
       {/*<button onClick={createFont}>Choose your font</button>*/}
       <button
         onClick={() => {
@@ -142,10 +126,6 @@ function App() {
       >
         Clear
       </button>
-      {/* Good idea : check the current value 
-
-{imgUrl}        // each Link
-{selectUrl}     //  ARRAY from all links   */}
       <br />
       <img src={imgUrl + '.jpg'} alt=" " /> <br />
       <a href={imgUrl + '.jpg'} download onClick={() => download()}>
