@@ -98,6 +98,7 @@ function App() {
       <button onClick={createURL}>Add Text!</button>
       {/* reload window to default */}
       <button
+        className="removeButton"
         onClick={() => {
           window.location.reload();
         }}

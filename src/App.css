@@ -32,6 +32,10 @@ button:active {
   background-color: #fff;
   color: rgb(194, 12, 43);
 }
+.removeButton {
+  background-color: #c73d3d;
+  color: #fff;
+}
 a {
   text-decoration: none;
 }
