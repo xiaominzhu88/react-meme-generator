@@ -7,9 +7,12 @@ function App() {
   const [textSecondInput, setTextSecondInput] = useState('');
   const [selectUrl, setSelectUrl] = useState([]);
   const [imgUrl, setImgUrl] = useState('https://memegen.link/tried');
-  const [imageFont, setImageFont] = useState([]); // font
+  const [imageFont, setImageFont] = useState([]);
   const [show, setShow] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
+    setIsLoading(true);
     fetch('https://memegen.link/api/templates/', {
       headers: { 'Content-Type': 'application/json' },
     })
@@ -21,18 +24,21 @@ function App() {
         console.log('selectUrl:', imgData);
         // Update the dropdown list urls into NEW selectUrl, Array, use map to get each of url
         setSelectUrl(imgData); // set to new meme-links
+        setIsLoading(false);
       })
       .catch((e) => console.log(e));
   }, []);
 
   useEffect(() => {
-    fetch('https://memegen.link/api/fonts/') // get fonts
+    setIsLoading(true);
+    fetch('https://memegen.link/api/fonts/')
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
 
         // get 20 fonts in array ========>>>>>imageFont updated
         setImageFont(data);
+        setIsLoading(false);
       });
   }, []);
 
@@ -106,17 +112,24 @@ function App() {
         Clear
       </button>
       <br />
-      <img
-        src={imgUrl + '.jpg'}
-        alt=" "
-        style={{ display: !show ? 'block' : 'none' }}
-      />{' '}
+      {isLoading ? (
+        'Loading...'
+      ) : (
+        <>
+          <img
+            src={imgUrl + '.jpg'}
+            alt=" "
+            style={{ display: !show ? 'block' : 'none' }}
+          />
+          <br />
+          <img
+            src={imgUrl}
+            alt=" "
+            style={{ display: show ? 'block' : 'none' }}
+          />{' '}
+        </>
+      )}
       <br />
-      <img
-        src={imgUrl}
-        alt=" "
-        style={{ display: show ? 'block' : 'none' }}
-      />{' '}
       <label
         style={{ fontFamily: 'monospace', color: 'green', fontWeight: 700 }}
       >
