@@ -21,7 +21,7 @@ function App() {
         // Object.values shows all the links, KEYS should show all the names
         const imgData = Object.values(data); // meme- links
 
-        console.log('selectUrl:', imgData);
+        //console.log('selectUrl:', imgData);
         // Update the dropdown list urls into NEW selectUrl, Array, use map to get each of url
         setSelectUrl(imgData); // set to new meme-links
         setIsLoading(false);
@@ -40,7 +40,7 @@ function App() {
         setImageFont(data);
         setIsLoading(false);
       });
-  }, []);
+  }, [setImageFont]);
 
   //  input current value
   function inputText(event) {
@@ -72,7 +72,7 @@ function App() {
     <div className="App">
       <h1>React-meme-Generator</h1>
       <br />
-      {/* Create Dropdown List to show all the fetched data-links */}
+      {/* Create Dropdown List to show all the data-links */}
       <label
         style={{ fontFamily: 'monospace', color: 'green', fontWeight: 700 }}
       >
@@ -83,8 +83,11 @@ function App() {
         {selectUrl.map((url, i) => {
           return (
             <option key={i} value={url.replace('api/templates/', '')}>
-              {/* use replace to get ONLY the img NAME in the option */}
-              {url.replace('https://memegen.link/api/templates/', '')}
+              {/* Below will show the whole link in the dropdown list */}
+              {/* {url.replace('https://memegen.link/api/templates/', '')} */}
+
+              {/* use slice to get ONLY the img NAME in the option */}
+              {url.slice(34)}
             </option>
           );
         })}
